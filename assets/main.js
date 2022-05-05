@@ -25,9 +25,9 @@ function gerar_tabela(l, c, bb) { //função feita somente para gerar o tabuleir
     b = bb
 
     document.querySelector("#tabe").innerHTML = ""
-    for (i = 0; i < (c+1); i++) {
+    for (i = 0; i < c; i++) {
         table[i] = []
-        for (j = 0; j < (l+1); j++) {
+        for (j = 0; j < l; j++) {
             table[i][j] = 0
             document.querySelector("#tabe").innerHTML += "<input onclick='jogar(" + j + "," + i + ")' type='button' id=" + j + "|" + i + " value='0'>"
         }
@@ -41,27 +41,29 @@ function gerar_bombas() {
         x = Math.floor(Math.random() * (linha))
         y = Math.floor(Math.random() * (coluna))
         if (table[y][x] == 0) {
-            table[y][x] = 1
+            table[y][x] = '*'
             document.getElementById(x + "|" + y).value = 1
             bomba++
         }
     }
-   /* for(i=0;i<coluna;i++){
+
+    for(i=0;i<coluna;i++){
         for(j=0;j<linha;j++){
-            if(table[i][j]!=0){
-                if(table[i+1][j]!=1 ||table[i][j+1]!=1){
-                    table[i+1][j]+='a'
-                    table[i][j+1]+='a'
-                    table[i+1][j+1]+='a'
-                    table[i-1][j]+='a'
-                    table[i][j-1]+='a'
-                    table[i-1][j-1]+='a'
-                    table[i+1][j-1]+='a'
-                    table[i-1][j+1]+='a'
-                }
+            if(table[i][j]!='*'){
+                if(table[i-1] != undefined && table[i-1][j-1]=='*'){table[i][j]+=1}
+                if(table[i-1] != undefined && table[i-1][j]=='*'){table[i][j]+=1}
+                if(table[i-1] != undefined && table[i-1][j+1]=='*'){table[i][j]+=1}
+                
+                if(table[i][j-1] =='*' ){table[i][j]+=1}
+                if(table[i][j+1] =='*' ){table[i][j]+=1}
+                
+                if(table[i+1] != undefined && table[i+1][j-1]=='*'){table[i][j]+=1}
+                if(table[i+1] != undefined && table[i+1][j]=='*'){table[i][j]+=1}
+                if(table[i+1] != undefined && table[i+1][j+1]=='*'){table[i][j]+=1}
             }
         }
-    }*/
+    }
+
     console.table(table)
 }
 
