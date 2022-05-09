@@ -1,9 +1,11 @@
 var table = []
 var linha, coluna
 var b, primeira_jogada
+var win = false
 
 
 function difculdade(dfc) {
+    win = false
     primeira_jogada = true
     switch (dfc) {
         case 1:
@@ -18,7 +20,7 @@ function difculdade(dfc) {
     }
 }
 
-function gerar_tabela(l, c, bb) { //função feita somente para gerar o tabuleiro!
+function gerar_tabela(l, c, bb) {
     table = []
     linha = l
     coluna = c
@@ -35,31 +37,34 @@ function gerar_tabela(l, c, bb) { //função feita somente para gerar o tabuleir
     }
 }
 
-function gerar_bombas() {
+function gerar_bombas(li, co) {
     var bomba = 0
     while (bomba < b) {
         x = Math.floor(Math.random() * (linha))
         y = Math.floor(Math.random() * (coluna))
-        if (table[y][x] == 0) {
-            table[y][x] = '*'
-            document.getElementById(x + "|" + y).value = 1
-            bomba++
+        if (x == li && y == co) {
+            continue
+        } else {
+            if (table[y][x] == 0) {
+                table[y][x] = 'B'
+                bomba++
+            }
         }
     }
 
-    for(i=0;i<coluna;i++){
-        for(j=0;j<linha;j++){
-            if(table[i][j]!='*'){
-                if(table[i-1] != undefined && table[i-1][j-1]=='*'){table[i][j]+=1}
-                if(table[i-1] != undefined && table[i-1][j]=='*'){table[i][j]+=1}
-                if(table[i-1] != undefined && table[i-1][j+1]=='*'){table[i][j]+=1}
-                
-                if(table[i][j-1] =='*' ){table[i][j]+=1}
-                if(table[i][j+1] =='*' ){table[i][j]+=1}
-                
-                if(table[i+1] != undefined && table[i+1][j-1]=='*'){table[i][j]+=1}
-                if(table[i+1] != undefined && table[i+1][j]=='*'){table[i][j]+=1}
-                if(table[i+1] != undefined && table[i+1][j+1]=='*'){table[i][j]+=1}
+    for (i = 0; i < coluna; i++) {
+        for (j = 0; j < linha; j++) {
+            if (table[i][j] != 'B') {
+                if (table[i - 1] != undefined && table[i - 1][j - 1] == 'B') { table[i][j] += 1 }
+                if (table[i - 1] != undefined && table[i - 1][j] == 'B') { table[i][j] += 1 }
+                if (table[i - 1] != undefined && table[i - 1][j + 1] == 'B') { table[i][j] += 1 }
+
+                if (table[i][j - 1] == 'B') { table[i][j] += 1 }
+                if (table[i][j + 1] == 'B') { table[i][j] += 1 }
+
+                if (table[i + 1] != undefined && table[i + 1][j - 1] == 'B') { table[i][j] += 1 }
+                if (table[i + 1] != undefined && table[i + 1][j] == 'B') { table[i][j] += 1 }
+                if (table[i + 1] != undefined && table[i + 1][j + 1] == 'B') { table[i][j] += 1 }
             }
         }
     }
@@ -67,9 +72,41 @@ function gerar_bombas() {
     console.table(table)
 }
 
+function revelarall() {
+    for (i = 0; i < coluna; i++) {
+        for (j = 0; j < linha; j++) {
+            document.getElementById(j + "|" + i).value = table[i][j]
+        }
+    }
+}
+
+function revelacelula(li, co) {
+    document.getElementById(li + "|" + co).value = table[co][li]
+    if (table[co][li] == 'B') {
+        revelarall()
+        alert('perdeu')
+    }
+
+    if (table[co][li] == 0) {
+
+            revelazero(li,co)
+        
+    }
+}
+
+function revelazero(li,co) {
+
+    
+
+}
+
 function jogar(li, co) {
+
     if (primeira_jogada) {
-        gerar_bombas()
+        gerar_bombas(li, co)
         primeira_jogada = false
     }
+
+    revelacelula(li, co)
+
 }
