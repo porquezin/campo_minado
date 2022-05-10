@@ -81,10 +81,7 @@ function revelarall() {
 }
 
 function revela(li, co) {
-    if(table[co][li]!=undefined){
-
-        document.getElementById(li + "|" + co).value = table[co][li]
-    }else{return}
+    document.getElementById(li + "|" + co).value = table[co][li]
     document.getElementById(li + "|" + co).disabled=true
 }
 
@@ -103,49 +100,27 @@ revela(li,co)
 
 function desce(li,co){
     while (table[co][li] == 0) {
-        let att_li = li 
-        let att_co = co 
-        dir(att_li,att_co)
-        esc(att_li,att_co)
         if (table[co + 1] != undefined) {
             revela(li, co + 1)
             co++
-            if(table[li - 1] != undefined && table[li + 1] != undefined){
-                revela(li-1,co)
-                revela(li+1,co)
-            }
-        }else{return}
+        }
     }
 }
 function sobe(li,co){
     while (table[co][li] == 0) {
-        let att_li = li 
-        let att_co = co 
-        dir(att_li,att_co)
-        esc(att_li,att_co)
         if (table[co - 1] != undefined) {
             revela(li, co - 1)
             co--
-            if(table[li - 1] != undefined && table[li + 1] != undefined){
-                revela(li-1,co)
-                revela(li+1,co)
-            }
-        }else{return}
+        }
     }
 }
 function dir(li,co){
 
     while (table[co][li] == 0) {
-        
         if (table[li + 1] != undefined) {
             revela(li+1,co)
             li++
-            if(table[co - 1] != undefined && table[co + 1] != undefined){
-                revela(li,co-1)
-                revela(li,co+1)
-            }
-            
-        }else{return}
+        }
     }
 
 }
@@ -155,27 +130,24 @@ function esc(li,co){
         if (table[li - 1] != undefined) {
             revela(li-1,co)
             li--
-            if(table[co - 1] != undefined && table[co + 1] != undefined){
-                revela(li,co-1)
-                revela(li,co+1)
-            }
-        }else{return}
+        }
     }
+
 }
 
-function revelazero(li, co) {
+function revelazero(li, co,count) {
     debugger
     count = 0
     let att_li = li 
     let att_co = co 
     revela(li, co)
 
+    
+    desce(att_li,att_co)
+    sobe(att_li,att_co)
 
-        desce(att_li,att_co)
-        sobe(att_li,att_co)
-        dir(att_li,att_co)
-        esc(att_li,att_co)
-        
+    dir(att_li,att_co)
+    esc(att_li,att_co)
 
 }
 
