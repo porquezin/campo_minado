@@ -2,7 +2,6 @@ var table = []
 var linha, coluna
 var b, primeira_jogada
 var win = false
-var count
 
 function difculdade(dfc) {
     win = false
@@ -68,7 +67,6 @@ function gerar_bombas(li, co) {
             }
         }
     }
-
     console.table(table)
 }
 
@@ -81,12 +79,15 @@ function revelarall() {
 }
 
 function revela(li, co) {
-    document.getElementById(li + "|" + co).value = table[co][li]
-    document.getElementById(li + "|" + co).disabled=true
+    //document.getElementById(li + "|" + co).disabled = true
+    if (table[co][li] != undefined) {
+        document.getElementById(li + "|" + co).value = table[co][li]
+
+    } else { return }
 }
 
 function revelacelula(li, co, user) {
-revela(li,co)
+    revela(li, co)
     if (table[co][li] == 0) {
         revelazero(li, co)
     }
@@ -98,70 +99,103 @@ revela(li,co)
 
 }
 
-function desce(li,co){
+function desce(li, co) {
+
     while (table[co][li] == 0) {
         if (table[co + 1] != undefined) {
             revela(li, co + 1)
             co++
-        }
+        } else { return }
     }
+
 }
-function sobe(li,co){
+
+function sobe(li, co) {
+
     while (table[co][li] == 0) {
         if (table[co - 1] != undefined) {
             revela(li, co - 1)
             co--
-        }
+        } else { return }
     }
-}
-function dir(li,co){
 
+}
+
+function desce_dir(li, co) {
     while (table[co][li] == 0) {
-        if (table[li + 1] != undefined) {
-            revela(li+1,co)
-            li++
-        }
+        let att_li = li
+        if (table[co + 1] != undefined) {
+            revela(li, co + 1)
+            revela(li + 1, co + 1)
+            revela(li - 1, co + 1)
+            dir(att_li, co)
+            co++
+        } else { return }
     }
-
 }
-function esc(li,co){
+function sobe_dir(li, co) {
+    while (table[co][li] == 0) {
+        let att_li = li
+        if (table[co - 1] != undefined) {
+            revela(li, co - 1)
+            revela(li+1,co-1)
+            revela(li-1,co-1)
+            dir(att_li,co)
+            co--
+        } else { return }
+    }
+}
 
+function dir(li, co) {
+    while (table[co][li] == 0) {
+        
+        if (table[li + 1] != undefined) {
+            revela(li + 1, co)
+            if (table[co - 1] == 0) {
+                desce(li, co-1)
+            }
+            if (table[co + 1] == 0) {
+                sobe(li, co+1)
+            }
+        if(table[co][li-1]!=0 || table[co][li+1]!=0){
+            revela(li,co+1)
+            revela(li,co-1)
+        }
+            
+            
+            li++
+
+        } else { return }
+    }
+}
+/*
+
+function esc(li, co) {
     while (table[co][li] == 0) {
         if (table[li - 1] != undefined) {
-            revela(li-1,co)
+            revela(li - 1, co)
             li--
-        }
+            if (table[co - 1] != undefined && table[co + 1] != undefined) {
+                revela(li, co - 1)
+                revela(li, co + 1)
+            }
+        } else { return }
     }
+}*/
 
-}
+function revelazero(li, co) {
 
-function revelazero(li, co,count) {
-    debugger
-    count = 0
-    let att_li = li 
-    let att_co = co 
+    let att_li = li
+    let att_co = co
     revela(li, co)
-
-    
-    desce(att_li,att_co)
-    sobe(att_li,att_co)
-
-    dir(att_li,att_co)
-    esc(att_li,att_co)
-
+    desce_dir(att_li, att_co)
+    sobe_dir(att_li, att_co)
 }
 
 function jogar(li, co) {
-
     if (primeira_jogada) {
-
-
         gerar_bombas(li, co)
-
         primeira_jogada = false
-
     }
-
     revelacelula(li, co, true)
-
 }

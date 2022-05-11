@@ -70,104 +70,25 @@ function gerar_bombas(li, co) {
     console.table(table)
 }
 
-function revelarall() {
-    for (i = 0; i < coluna; i++) {
-        for (j = 0; j < linha; j++) {
-            document.getElementById(j + "|" + i).value = table[i][j]
-        }
-    }
-}
-
-function revela(li, co) {
-    if (table[co][li] != undefined) {
-
-        document.getElementById(li + "|" + co).value = table[co][li]
-    } else { return }
-    document.getElementById(li + "|" + co).disabled = true
-}
-
-function revelacelula(li, co, user) {
-    revela(li, co)
-    if (table[co][li] == 0) {
-        revelazero(li, co)
-    }
-
-    if (table[co][li] == 'B' && user) {
-        revelarall()
-        alert('perdeu')
-    }
-
-}
-
-function desce(li, co) {
-    while (table[co][li] == 0) {
-        let att_li = li
-        let att_co = co
-        dir(att_li, att_co)
-        esc(att_li, att_co)
-        if (table[co + 1] != undefined) {
-            revela(li, co + 1)
-            co++
-            if (table[li - 1] != undefined && table[li + 1] != undefined) {
-                revela(li - 1, co)
-                revela(li + 1, co)
-            }
-        } else { return }
-    }
-}
-function sobe(li, co) {
-    while (table[co][li] == 0) {
-        let att_li = li
-        let att_co = co
-        dir(att_li, att_co)
-        esc(att_li, att_co)
-        if (table[co - 1] != undefined) {
-            revela(li, co - 1)
-            co--
-            if (table[li - 1] != undefined && table[li + 1] != undefined) {
-                revela(li - 1, co)
-                revela(li + 1, co)
-            }
-        } else { return }
-    }
-}
-
-function dir(li, co) {
-    while (table[co][li] == 0) {
-        if (table[li + 1] != undefined) {
-            revela(li + 1, co)
-            li++
-            if (table[co - 1] != undefined && table[co + 1] != undefined) {
-                revela(li, co - 1)
-                revela(li, co + 1)
-            }
-
-        } else { return }
-    }
-}
-
-function esc(li, co) {
-    while (table[co][li] == 0) {
-        if (table[li - 1] != undefined) {
-            revela(li - 1, co)
-            li--
-            if (table[co - 1] != undefined && table[co + 1] != undefined) {
-                revela(li, co - 1)
-                revela(li, co + 1)
-            }
-        } else { return }
-    }
-}
-
 function revelazero(li, co) {
     debugger
-    let att_li = li
-    let att_co = co
-    revela(li, co)
-    desce(att_li, att_co)
-    sobe(att_li, att_co)
-    dir(att_li, att_co)
-    esc(att_li, att_co)
+    document.getElementById(li + "|" + co).disabled = true
+    document.getElementById(li + "|" + co).value = table[co][li]
+
+    if (table[co][li] == 0) {
+        for (i = li - 1; i <= li + 1; i++) {
+            for (j = co - 1; j <= co + 1; j++) {
+                if (i >= 0 && i <= linha && j >= 0 && j <= coluna) {
+                    var cell = document.getElementById(i + "|" + j)
+                    if (cell.className != "a") {
+                        cell.className = "a"
+                        document.getElementById(li + "|" + co).value = table[co][li]
+                        revelazero(i, j)
+                    }
+                }
+            }
+        }
+    }
 }
 
 function jogar(li, co) {
@@ -175,5 +96,5 @@ function jogar(li, co) {
         gerar_bombas(li, co)
         primeira_jogada = false
     }
-    revelacelula(li, co, true)
+    revelazero(li, co)
 }
