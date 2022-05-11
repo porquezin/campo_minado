@@ -71,7 +71,7 @@ function gerar_bombas(li, co) {
 }
 
 function revelazero(li, co) {
-    debugger
+    //termina pra eu plz kkk
     document.getElementById(li + "|" + co).disabled = true
     document.getElementById(li + "|" + co).value = table[co][li]
 
