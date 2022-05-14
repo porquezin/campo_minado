@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+body{
+    background-color: grey;
+}
+
+.titulo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 55px;
+    color: yellow;
+    text-shadow: 5px 5px 5px black;
+    
+	-webkit-animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	 animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+@-webkit-keyframes tracking-in-contract-bck {
+    0% {
+      letter-spacing: 1em;
+      -webkit-transform: translateZ(400px);
+              transform: translateZ(400px);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+  @keyframes tracking-in-contract-bck {
+    0% {
+      letter-spacing: 1em;
+      -webkit-transform: translateZ(400px);
+              transform: translateZ(400px);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+
+  .dificuldade {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 35px;
+    color: yellow;
+    text-shadow: 5px 5px 5px black;
+
+    -webkit-animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	 animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+@-webkit-keyframes tracking-in-contract-bck {
+    0% {
+      letter-spacing: 1em;
+      -webkit-transform: translateZ(400px);
+              transform: translateZ(400px);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+  @keyframes tracking-in-contract-bck {
+    0% {
+      letter-spacing: 1em;
+      -webkit-transform: translateZ(400px);
+              transform: translateZ(400px);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+
+  .checkbox {
+    content: "";
+    font-family: 'Orbitron', sans-serif;
+    font-size: 25px;
+    color: yellow;
+    text-shadow: 5px 5px 5px black;
+
+    -webkit-animation: text-focus-in 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) 2s both;
+    animation: text-focus-in 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) 2s both;
+  }
+
+  @-webkit-keyframes text-focus-in {
+    0% {
+      -webkit-filter: blur(12px);
+              filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  @keyframes text-focus-in {
+    0% {
+      -webkit-filter: blur(12px);
+              filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  .checkbox input {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .checkbox label {
+    position: relative;
+    padding-left: 2.2em;
+    display: inline-block;
+
+  }
+  .checkbox label::before {
+      border-radius: 30%;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 1.5em;
+    width: 1.5em;
+    background: #FFF;
+    margin-right: 0.5em;
+    border: 1px solid #999;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translate(0, -50%);
+  }
+  .checkbox label::after {
+      border-radius: 40%;
+    content: "\2713";
+    position: absolute;
+    top: 50%;
+    left: 0.75em;
+    transform: translate(-50%, -50%);
+    font-size: 1em;
+    color: rgb(117, 117, 117);
+    opacity: 0;
+    transition: all 0.2s ease;
+  }
+  .checkbox label:focus::before, .checkbox label:hover::before {
+      width: 40px;
+    background: rgb(119, 119, 119);
+  }
+  .checkbox input:checked + label::before {
+    background: hsl(54, 100%, 50%);
+    border-color: hsl(54, 100%, 50%);
+  }
+  .checkbox input:checked + label::after {
+    opacity: 1;
+  }
+  
