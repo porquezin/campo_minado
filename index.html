@@ -1,32 +1,51 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-    <script src="/assets/main.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campo Minado</title>
 </head>
 <body>
-    <center>
-        <h1>Campo Minado</h1>
+    <center>       
+        <h1 class="titulo">Campo Minado</h1>
+
         <table id="tabela">
 
         </table>
 
-        <div>
-            <label>Dificuldade:</label>
-            <form>
-                <select id="dificuldade">
-                    <option onselect="gerar_tabela(8,10)" value="0" selected>Fácil</option>
-                    <option value="1">Intermediário</option>
-                    <option value="2">Difícil</option>
-            </select>
-            </form>
-            <input type="button" onclick="difculdade(2)" value="a">
-            <div id="tabe" ></div>
+        <div class="dificuldade">
+
+            <legend>Escolha sua dificuldade:</legend>
         </div>
-        <label id="test"></label>
+
+            <br><br>
+            
+        <div class="checkbox">
+
+            <div>
+                <input style="align-items: center;" type="checkbox" id="facil" name="dificuldade" 
+            value="Fácil" >
+
+                <label for="facil"> Fácil </label>
+            </div>
+                        <br>
+            <div>
+                <input style="align-items: center;" type="checkbox" id="medio" name="dificuldade"
+            value="Médio" >
+
+                <label for="medio"> Médio </label>
+            </div>
+                        <br>
+            <div>
+                <input style="align-items: center;"  type="checkbox" id="dificil" name="dificuldade"
+            value="Difícil">
+
+                <label for="dificil"> Difícil </label>
+            </div>
+        </div>         
     </center>    
 </body>
 </html>
