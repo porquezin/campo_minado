@@ -1,7 +1,8 @@
 var table = []
 var linha, coluna
-var b, primeira_jogada
+var b, primeira_jogada, cell
 var win = false
+var mim = 0, seg = 0
 
 function difculdade(dfc) {
     win = false
@@ -70,10 +71,47 @@ function gerar_bombas(li, co) {
     console.table(table)
 }
 
+function revela(li, co) {
+    if (table[co][li] != undefined) {
+        document.getElementById(li + "|" + co).disabled = true
+        document.getElementById(li + "|" + co).value = table[co][li]
+    } else { return }
+}
+
+function dir(li, co) {
+    if (table[li][co] != undefined) {
+        while (table[co][li] == 0) {
+            if (table[li + 1] != undefined) {
+                if (table[li + 1] == 0) {
+                    revelazero(li + 1, co)
+                } else {
+                    revela(li + 1, co)
+                }
+                li++
+            } else { return }
+        }
+    }
+}
+
+function revelarall() {
+    for (i = 0; i < coluna; i++) {
+        for (j = 0; j < linha; j++) {
+            document.getElementById(j + "|" + i).disabled = true
+            document.getElementById(j + "|" + i).value = table[i][j]
+        }
+    }
+}
 function revelazero(li, co) {
-    //termina pra eu plz kkk
+
     document.getElementById(li + "|" + co).disabled = true
     document.getElementById(li + "|" + co).value = table[co][li]
+
+    if (table[co][li] == 'B') {
+        crono = false
+        alert('perdeu')
+        revelarall()
+        return
+    }
 
     if (table[co][li] == 0) {
         for (i = li - 1; i <= li + 1; i++) {
@@ -83,7 +121,9 @@ function revelazero(li, co) {
                     if (cell.className != "a") {
                         cell.className = "a"
                         document.getElementById(li + "|" + co).value = table[co][li]
+                        dir(i, j)
                         revelazero(i, j)
+                        dir(i, j)
                     }
                 }
             }
@@ -91,7 +131,25 @@ function revelazero(li, co) {
     }
 }
 
+function tempo() {
+    temp = document.getElementById('timer')
+    temp2 = document.getElementById('timer2')
+    seg++
+    temp.innerHTML = seg
+    if (seg == 60) {
+        seg = 0
+        mim++
+        temp2.innerHTML = seg
+    }
+}
+
+function crono() {
+
+    setTimeout(function () { tempo() }, 1000)
+}
+
 function jogar(li, co) {
+    crono()
     if (primeira_jogada) {
         gerar_bombas(li, co)
         primeira_jogada = false
