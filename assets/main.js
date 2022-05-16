@@ -4,27 +4,30 @@ var b, primeira_jogada, cell
 var minutes = 0, seconds = 0
 var clock = true
 var inter
+var pontos = 0
+var po1 = 0
 
 function difculdade(dfc) {
     primeira_jogada = true
     switch (dfc) {
         case 1:
-            gerar_tabela(8, 10, 10)
+            gerar_tabela(8, 10, 10, 70)
             break;
         case 2:
-            gerar_tabela(14, 18, 40)
+            gerar_tabela(14, 18, 40, 212)
             break;
         case 3:
-            gerar_tabela(20, 24, 99)
+            gerar_tabela(20, 24, 99, 381)
             break;
     }
 }
 
-function gerar_tabela(l, c, bb) {
+function gerar_tabela(l, c, bb, po) {
     table = []
     linha = l
     coluna = c
     b = bb
+    po1 = po
 
     document.querySelector("#tabe").innerHTML = ""
     for (i = 0; i < c; i++) {
@@ -68,10 +71,10 @@ function gerar_bombas(li, co) {
 }
 
 function revela(li, co) {
-    if (table[co][li] != undefined) {
+    if (table[co][li] != undefined &&  document.getElementById(li + "|" + co).disabled != true) {
         document.getElementById(li + "|" + co).disabled = true
-        document.getElementById(li + "|" + co).className = 'a'
         document.getElementById(li + "|" + co).value = table[co][li]
+        pontos++
     } else { return }
 }
 
@@ -99,15 +102,18 @@ function revelarall() {
     }
 }
 
-function revelazero(li, co) {
+function revelazero(li, co, ) {
 
-    document.getElementById(li + "|" + co).disabled = true
-    document.getElementById(li + "|" + co).value = table[co][li]
+    revela(li, co)
 
     if (table[co][li] == '💣') {
         crono = false
         clearInterval(inter)
         alert('perdeu')
+        revelarall()
+        return
+    }else if (pontos == po1) {
+        alert('ganhou!')
         revelarall()
         return
     }
@@ -116,11 +122,12 @@ function revelazero(li, co) {
         for (i = li - 1; i <= li + 1; i++) {
             for (j = co - 1; j <= co + 1; j++) {
                 if (i >= 0 && i <= linha && j >= 0 && j <= coluna) {
-                    if (document.getElementById(i + "|" + j).className != "a") {
-                        document.getElementById(li + "|" + co).value = table[co][li]
-                        document.getElementById(i + "|" + j).className = "a"
-                        dir(i, j)
-                        revelazero(i, j)
+                    if(document.getElementById(i + "|" + j)!=null){
+                        if (document.getElementById(i + "|" + j).disabled != true) {
+                            revela(i,j)
+                            dir(i, j)
+                            revelazero(i, j)
+                        }
                     }
                 }
             }
@@ -140,8 +147,17 @@ const getHours = () => {
 
 
 function jogar(li, co) {
-    getHours()
+
+    console.log(pontos)
+
+    
+    if (pontos == po1) {
+        alert('ganhou!')
+        return
+    }
+    
     if (clock) {
+        getHours()
         clock = false
         getHours()
         inter = setInterval(() => { getHours() }, 1000)
