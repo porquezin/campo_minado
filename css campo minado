@@ -22,18 +22,29 @@ body{
   top: -100px
 }
 
-.botao {
-  border: none;
-  padding: 10px;
+
+.f {
+  padding: 10px 20px;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  border: hidden;
+  position: relative;
   text-decoration: none;
   cursor: pointer;
   transition: background .3s;
-  border-radius: 5px;
-  background-color: grey;
+  border-radius: 30%;
 }
 
-.campo {
-  
+.a{
+  padding: 10px 20px;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  border: hidden;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .3s;
+  border-radius: 30%;
 }
 
 .titulo {
