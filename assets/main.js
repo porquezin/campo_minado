@@ -43,24 +43,24 @@ function gerar_bombas(li, co) {
         x = Math.floor(Math.random() * (linha))
         y = Math.floor(Math.random() * (coluna))
         if (x != li && y != co) {
-            table[y][x] = 'B'
+            table[y][x] = '💣'
             bomba++
         }
     }
 
     for (i = 0; i < coluna; i++) {
         for (j = 0; j < linha; j++) {
-            if (table[i][j] != 'B') {
-                if (table[i - 1] != undefined && table[i - 1][j - 1] == 'B') { table[i][j] += 1 }
-                if (table[i - 1] != undefined && table[i - 1][j] == 'B') { table[i][j] += 1 }
-                if (table[i - 1] != undefined && table[i - 1][j + 1] == 'B') { table[i][j] += 1 }
+            if (table[i][j] != '💣') {
+                if (table[i - 1] != undefined && table[i - 1][j - 1] == '💣') { table[i][j] += 1 }
+                if (table[i - 1] != undefined && table[i - 1][j] == '💣') { table[i][j] += 1 }
+                if (table[i - 1] != undefined && table[i - 1][j + 1] == '💣') { table[i][j] += 1 }
 
-                if (table[i][j - 1] == 'B') { table[i][j] += 1 }
-                if (table[i][j + 1] == 'B') { table[i][j] += 1 }
+                if (table[i][j - 1] == '💣') { table[i][j] += 1 }
+                if (table[i][j + 1] == '💣') { table[i][j] += 1 }
 
-                if (table[i + 1] != undefined && table[i + 1][j - 1] == 'B') { table[i][j] += 1 }
-                if (table[i + 1] != undefined && table[i + 1][j] == 'B') { table[i][j] += 1 }
-                if (table[i + 1] != undefined && table[i + 1][j + 1] == 'B') { table[i][j] += 1 }
+                if (table[i + 1] != undefined && table[i + 1][j - 1] == '💣') { table[i][j] += 1 }
+                if (table[i + 1] != undefined && table[i + 1][j] == '💣') { table[i][j] += 1 }
+                if (table[i + 1] != undefined && table[i + 1][j + 1] == '💣') { table[i][j] += 1 }
             }
         }
     }
@@ -104,7 +104,7 @@ function revelazero(li, co) {
     document.getElementById(li + "|" + co).disabled = true
     document.getElementById(li + "|" + co).value = table[co][li]
 
-    if (table[co][li] == 'B') {
+    if (table[co][li] == '💣') {
         crono = false
         clearInterval(inter)
         alert('perdeu')
