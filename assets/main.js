@@ -1,11 +1,11 @@
 var table = []
 var linha, coluna
 var b, primeira_jogada, cell
-var win = false
-var mim = 0, seg = 0
+var minutes = 0, seconds = 0
+var clock = true
+var inter
 
 function difculdade(dfc) {
-    win = false
     primeira_jogada = true
     switch (dfc) {
         case 1:
@@ -31,7 +31,7 @@ function gerar_tabela(l, c, bb) {
         table[i] = []
         for (j = 0; j < l; j++) {
             table[i][j] = 0
-            document.querySelector("#tabe").innerHTML += "<input onclick='jogar(" + j + "," + i + ")' type='button' id=" + j + "|" + i + " value=' '>"
+            document.querySelector("#tabe").innerHTML += "<input onclick='jogar(" + j + "," + i + ")' class='f' type='button' id=" + j + "|" + i + " value=' '>"
         }
         document.querySelector("#tabe").innerHTML += "<br>"
     }
@@ -42,13 +42,9 @@ function gerar_bombas(li, co) {
     while (bomba < b) {
         x = Math.floor(Math.random() * (linha))
         y = Math.floor(Math.random() * (coluna))
-        if (x == li && y == co) {
-            continue
-        } else {
-            if (table[y][x] == 0) {
-                table[y][x] = 'B'
-                bomba++
-            }
+        if (x != li && y != co) {
+            table[y][x] = 'B'
+            bomba++
         }
     }
 
@@ -74,6 +70,7 @@ function gerar_bombas(li, co) {
 function revela(li, co) {
     if (table[co][li] != undefined) {
         document.getElementById(li + "|" + co).disabled = true
+        document.getElementById(li + "|" + co).className = 'a'
         document.getElementById(li + "|" + co).value = table[co][li]
     } else { return }
 }
@@ -101,6 +98,7 @@ function revelarall() {
         }
     }
 }
+
 function revelazero(li, co) {
 
     document.getElementById(li + "|" + co).disabled = true
@@ -108,6 +106,7 @@ function revelazero(li, co) {
 
     if (table[co][li] == 'B') {
         crono = false
+        clearInterval(inter)
         alert('perdeu')
         revelarall()
         return
@@ -117,13 +116,11 @@ function revelazero(li, co) {
         for (i = li - 1; i <= li + 1; i++) {
             for (j = co - 1; j <= co + 1; j++) {
                 if (i >= 0 && i <= linha && j >= 0 && j <= coluna) {
-                    var cell = document.getElementById(i + "|" + j)
-                    if (cell.className != "a") {
-                        cell.className = "a"
+                    if (document.getElementById(i + "|" + j).className != "a") {
                         document.getElementById(li + "|" + co).value = table[co][li]
+                        document.getElementById(i + "|" + j).className = "a"
                         dir(i, j)
                         revelazero(i, j)
-                        dir(i, j)
                     }
                 }
             }
@@ -131,25 +128,24 @@ function revelazero(li, co) {
     }
 }
 
-function tempo() {
-    temp = document.getElementById('timer')
-    temp2 = document.getElementById('timer2')
-    seg++
-    temp.innerHTML = seg
-    if (seg == 60) {
-        seg = 0
-        mim++
-        temp2.innerHTML = seg
+const getHours = () => {
+    const clock = document.getElementById('clock')
+    seconds++
+    if (seconds == 60) {
+        seconds = 0
+        minutes++
     }
+    clock.innerHTML = `${minutes}:${seconds}`
 }
 
-function crono() {
-
-    setTimeout(function () { tempo() }, 1000)
-}
 
 function jogar(li, co) {
-    crono()
+    getHours()
+    if (clock) {
+        clock = false
+        getHours()
+        inter = setInterval(() => { getHours() }, 1000)
+    }
     if (primeira_jogada) {
         gerar_bombas(li, co)
         primeira_jogada = false
