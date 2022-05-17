@@ -22,22 +22,17 @@ body{
   top: -100px
 }
 
-
-.f {
-  padding: 10px 20px;
-  font-size: 20px;
-  color: rgb(0, 0, 0);
-  border: hidden;
-  position: relative;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background .3s;
-  border-radius: 30%;
+#clock{
+  font-size: 30px;
 }
 
-.a{
+input{
+  height: 45px;
+  width: 45px;
+}
+.f {
   padding: 10px 20px;
-  font-size: 20px;
+  font-size: 15px;
   color: rgb(0, 0, 0);
   border: hidden;
   position: relative;
@@ -45,6 +40,8 @@ body{
   cursor: pointer;
   transition: background .3s;
   border-radius: 30%;
+  margin-right: 2px;
+  margin-bottom: 2px;
 }
 
 .titulo {
@@ -55,8 +52,7 @@ body{
     z-index: 2;
     position: relative;
     top: -120px
-
-	-webkit-animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	 -webkit-animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 	 animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 

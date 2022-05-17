@@ -145,12 +145,10 @@ const getHours = () => {
     clock.innerHTML = `${minutes}:${seconds}`
 }
 
-
 function jogar(li, co) {
 
     console.log(pontos)
 
-    
     if (pontos == po1) {
         alert('ganhou!')
         return
