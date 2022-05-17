@@ -113,6 +113,7 @@ function revelazero(li, co, ) {
         revelarall()
         return
     }else if (pontos == po1) {
+        clearInterval(inter)
         alert('ganhou!')
         revelarall()
         return
