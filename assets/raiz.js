@@ -1,8 +1,12 @@
+/*
+Feito por:
+Renato Magno
+Fernando Yokoyama
+Rodrigo Souza
+*/
 var table = []
 var linha, coluna
 var b, primeira_jogada, cell
-var minutes = 0, seconds = 0
-var clock = true
 var inter
 var pontos = 0
 var po1 = 0
@@ -108,12 +112,10 @@ function revelazero(li, co, ) {
 
     if (table[co][li] == '💣') {
         crono = false
-        clearInterval(inter)
         alert('perdeu')
         revelarall()
         return
     }else if (pontos == po1) {
-        clearInterval(inter)
         alert('ganhou!')
         revelarall()
         return
@@ -136,25 +138,15 @@ function revelazero(li, co, ) {
     }
 }
 
-const getHours = () => {
-    const clock = document.getElementById('clock')
-    seconds++
-    if (seconds == 60) {
-        seconds = 0
-        minutes++
-    }
-    clock.innerHTML = `${minutes}:${seconds}`
-}
-
 function jogar(li, co) {
 
     console.log(pontos)
 
-    if (clock) {
-        getHours()
-        clock = false
-        inter = setInterval(() => { getHours() }, 1000)
+    if (pontos == po1) {
+        alert('ganhou!')
+        return
     }
+    
     if (primeira_jogada) {
         gerar_bombas(li, co)
         primeira_jogada = false
