@@ -19,4 +19,4 @@
   ![image](https://user-images.githubusercontent.com/86249854/168905936-98a8ae13-624b-483d-b3ec-394f40771948.png)
     
 - Feito Por:
-#### Renato Magno<br>Yoko<br>Rodrigo ####
+#### Renato Magno<br>Fernando Yokoyama<br>Rodrigo Souza ####
