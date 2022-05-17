@@ -11,13 +11,13 @@ function difculdade(dfc) {
     primeira_jogada = true
     switch (dfc) {
         case 1:
-            gerar_tabela(8, 10, 10, 70)
+            gerar_tabela(8, 10, 10, 71)
             break;
         case 2:
-            gerar_tabela(14, 18, 40, 212)
+            gerar_tabela(14, 18, 40, 213)
             break;
         case 3:
-            gerar_tabela(20, 24, 99, 381)
+            gerar_tabela(20, 24, 99, 382)
             break;
     }
 }
