@@ -102,7 +102,7 @@ function revelarall() {
     }
 }
 
-function revelazero(li, co, ) {
+function revelazero(li, co) {
 
     revela(li, co)
 
